@@ -54,14 +54,26 @@ namespace RobotXamarin
         }
         private void Place_Clicked(object sender, EventArgs e)
         {
-            //xPosition.Text;
-            //yPosition.Text;
-            //facingDirection.;
+            try
+            {
+                var x = int.Parse(xPosition.Text);
+                var y = int.Parse(yPosition.Text);
+                var direction = (Direction)Enum.Parse(typeof(Direction), facingDirection.SelectedItem.ToString());
+                robot.Place(x, y, direction);
+
+                var rotateDegree = GetRotateDegree(robot);
+                robotImage.RotateTo(rotateDegree);
+                tableTop.Children.Add(robotImage, robot.X, numberOfTiles - 1 - robot.Y);
+            }
+            catch(Exception ex)
+            {
+                DisplayAlert("Invalid inputs", "Please enter all fields before press Place", "OK");
+            }
         }
 
         #endregion
 
-        void DrawSquareTableTop(int numOfTile)
+        private void DrawSquareTableTop(int numOfTile)
         {
             for (int i = 0; i < numOfTile; i++)
             {
@@ -72,7 +84,7 @@ namespace RobotXamarin
             }
         }
 
-        void SpawnRobot()
+        private void SpawnRobot()
         {
             if (tableTop.Children.Count < 1)
                 return;
@@ -88,6 +100,21 @@ namespace RobotXamarin
             tableTop.Children.Add(robotImage, 0, numberOfTiles - 1);
         }
 
-       
+        private int GetRotateDegree(Robot robot)
+        {
+            switch (robot.FacingDirection)
+            {
+                case Direction.NORTH:
+                    return 0;
+                case Direction.EAST:
+                    return 90;
+                case Direction.SOUTH:
+                    return 180;
+                case Direction.WEST:
+                    return 270;
+            }
+            return 0;
+        }
+
     }
 }

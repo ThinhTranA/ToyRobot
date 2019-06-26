@@ -24,6 +24,43 @@ namespace RobotXamarin
             SpawnRobot();
         }
 
+        #region Commands
+        private void Move_Clicked(object sender, EventArgs e)
+        {
+            robot.Move();
+
+            // Bottom left is (0,0) and top right is (4,4)
+            tableTop.Children.Add(robotImage, robot.X, numberOfTiles - 1 - robot.Y);
+        }
+
+        int curDegree = 0;
+        private void Left_Clicked(object sender, EventArgs e)
+        {
+            robot.Left();
+            curDegree -= 90;
+            robotImage.RotateTo(curDegree);
+        }
+
+        private void Right_Clicked(object sender, EventArgs e)
+        {
+            robot.Right();
+            curDegree += 90;
+            robotImage.RotateTo(curDegree);
+        }
+
+        private void Report_Clicked(object sender, EventArgs e)
+        {
+            reportLabel.Text = robot.Report();
+        }
+        private void Place_Clicked(object sender, EventArgs e)
+        {
+            //xPosition.Text;
+            //yPosition.Text;
+            //facingDirection.;
+        }
+
+        #endregion
+
         void DrawSquareTableTop(int numOfTile)
         {
             for (int i = 0; i < numOfTile; i++)
@@ -33,7 +70,6 @@ namespace RobotXamarin
                     tableTop.Children.Add(new Frame { BackgroundColor = Color.Gray, BorderColor = Color.Red }, i, j);
                 }
             }
-        
         }
 
         void SpawnRobot()
@@ -49,54 +85,9 @@ namespace RobotXamarin
                 WidthRequest = 50,
             };
             // Bottom left is (0,0) and top right is (4,4)
-            tableTop.Children.Add(robotImage, 0 , numberOfTiles - 1);
+            tableTop.Children.Add(robotImage, 0, numberOfTiles - 1);
         }
 
-        private int GetRotateDegree(Robot robot)
-        {
-            switch(robot.FacingDirection)
-            {
-                case Direction.NORTH:
-                    return 0;
-                case Direction.EAST:
-                    return 90;
-                case Direction.SOUTH:
-                    return 180;
-                case Direction.WEST:
-                    return 270;
-            }
-            return 0;
-        }
-
-        private void Move_Clicked(object sender, EventArgs e)
-        {
-            robot.Move();
-            // Bottom left is (0,0) and top right is (4,4)
-            tableTop.Children.Add(robotImage, robot.X, numberOfTiles - 1 - robot.Y);
-        }
-
-        private void Left_Clicked(object sender, EventArgs e)
-        {
-            int currentDegree = GetRotateDegree(robot);
        
-            robot.Left();
-            int rotateDegree = GetRotateDegree(robot);
-            if (Math.Abs(currentDegree - rotateDegree) >= 270)
-                rotateDegree = rotateDegree - 360;
-            robotImage.RotateTo(rotateDegree);
-        }
-
-        private void Right_Clicked(object sender, EventArgs e)
-        {
-            robot.Right();
-            var rotateDegree = GetRotateDegree(robot);
-            robotImage.RotateTo(rotateDegree);
-        }
-
-        private void Report_Clicked(object sender, EventArgs e)
-        {
-            robotImage.RotateTo(0);
-        }
-
     }
 }

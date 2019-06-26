@@ -8,6 +8,16 @@
     mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout>
+            <Grid>
+                <Label
+                    Grid.Column="0"
+                    HorizontalOptions="Start"
+                    Text="NORTH WEST" />
+                <Label
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Text="NORTH EAST" />
+            </Grid>
             <Grid
                 x:Name="tableTop"
                 AbsoluteLayout.LayoutBounds=".05,.95"
@@ -27,23 +37,85 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Button
-                Clicked="Move_Clicked"
-                HorizontalOptions="Center"
-                Text="Move" />
-            <Button
-                Clicked="Left_Clicked"
-                HorizontalOptions="Center"
-                Text="Left" />
-            <Button
-                Clicked="Right_Clicked"
-                HorizontalOptions="Center"
-                Text="Right" />
+            <Grid>
+                <Label
+                    Grid.Column="0"
+                    HorizontalOptions="Start"
+                    Text="SOUTH WEST" />
+                <Label
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Text="SOUTH EAST" />
+            </Grid>
 
-            <Button
-                Clicked="Report_Clicked"
-                HorizontalOptions="Center"
-                Text="Report" />
+            <Grid>
+                <Grid Grid.Column="0">
+                    <Button
+                        Grid.Row="0"
+                        Margin="10,20,10,0"
+                        Clicked="Place_Clicked"
+                        Text="Place" />
+                    <Grid Grid.Row="1">
+                        <Entry
+                            x:Name="xPosition"
+                            Grid.Column="0"
+                            Keyboard="Numeric"
+                            Placeholder="X" />
+                        <Entry
+                            x:Name="yPosition"
+                            Grid.Column="1"
+                            Keyboard="Numeric"
+                            Placeholder="Y" />
+                        <Picker
+                            x:Name="facingDirection"
+                            Title="Direction"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2">
+                            <Picker.Items>
+                                <x:String>NORTH</x:String>
+                                <x:String>SOUTH</x:String>
+                                <x:String>EAST</x:String>
+                                <x:String>WEST</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button
+                        Grid.Row="0"
+                        Margin="10,20,10,0"
+                        Clicked="Report_Clicked"
+                        Text="Report" />
+                    <Label
+                        x:Name="reportLabel"
+                        Grid.Row="1"
+                        Margin="10"
+                        FontAttributes="Bold"
+                        FontSize="Large" />
+                </Grid>
+            </Grid>
+            <Grid Margin="20">
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="Move_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Move" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Clicked="Left_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Left" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Clicked="Right_Clicked"
+                    HorizontalOptions="Center"
+                    Text="Right" />
+            </Grid>
+
+
         </StackLayout>
 
     </ContentPage.Content>

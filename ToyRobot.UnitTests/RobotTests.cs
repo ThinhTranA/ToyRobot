@@ -127,5 +127,112 @@ namespace ToyRobot.UnitTests
             Assert.AreEqual(0, string.Compare("3,3,NORTH", robot.Report()));
         }
 
+        [TestMethod]
+        public void PlaceBotInAvoidAreas()
+        {
+            var robot = new TestRobot();
+            robot.Avoid(5, 5);
+            robot.Avoid(2, 3);
+            robot.Avoid(3, 0);
+            var isPlaced = robot.Place(5, 5, Direction.NORTH);
+            Assert.AreEqual(false, isPlaced);
+
+            isPlaced = true;
+            isPlaced = robot.Place(2, 3, Direction.NORTH);
+            Assert.AreEqual(false, isPlaced);
+
+            isPlaced = true;
+            isPlaced = robot.Place(3, 0, Direction.NORTH);
+            Assert.AreEqual(false, isPlaced);
+        }
+
+        [TestMethod]
+        public void MoveBotToAvoidAreas()
+        {
+            var robot = new TestRobot();
+            robot.Avoid(0, 1);
+            robot.Avoid(1, 0);
+            robot.Move();
+            Assert.AreEqual(0, string.Compare("0,0,NORTH", robot.Report())); 
+
+            robot.Place(3, 3, Direction.NORTH);
+            robot.Avoid(3, 4);
+            robot.Avoid(4, 3);
+            robot.Avoid(2, 3);
+            robot.Avoid(3, 2);
+            robot.Move();
+            Assert.AreEqual(0, string.Compare("3,3,NORTH", robot.Report())); 
+        }
+
+        [TestMethod]
+        //Text Example, Interation 2
+        public void MovesPlacesBotToAvoidAreas()
+        {
+            var robot = new TestRobot();
+
+            robot.Place(1, 2, Direction.EAST);
+            robot.Avoid(2, 2);
+            robot.Avoid(2, 3);
+            robot.Move();
+            robot.Place(2, 3, Direction.EAST);
+            robot.Move();
+            robot.Left();
+            robot.Move();
+
+            Assert.AreEqual(0, string.Compare("1,3,NORTH", robot.Report()));
+        }
+
+        [TestMethod]
+        //Text Example, Interation 3
+        public void MovePlaceWithOldDirection()
+        {
+            var robot = new TestRobot();
+
+            robot.Place(1, 2, Direction.EAST);
+            robot.Avoid(2, 2);
+            robot.Avoid(2, 3);
+            robot.Move();
+            robot.Place(2, 3);
+            robot.Move();
+            robot.Left();
+            robot.Move();
+
+            Assert.AreEqual(0, string.Compare("1,3,NORTH", robot.Report()));
+        }
+
+        [TestMethod]
+        public void Interation4_A()
+        {
+            var robot = new TestRobot();
+
+            robot.Place(0, 0, Direction.NORTH);
+            robot.Right();
+            robot.Move();
+
+            Assert.AreEqual(0, string.Compare("1,3,NORTH", robot.Report()));
+        }
+        [TestMethod]
+        public void Interation4_B()
+        {
+            var robot = new TestRobot();
+
+            robot.Place(0, 0, Direction.NORTH);
+            robot.Right();
+            robot.Move();
+
+            Assert.AreEqual(0, string.Compare("1,3,NORTH", robot.Report()));
+        }
+        [TestMethod]
+        public void Interation4_C()
+        {
+            var robot = new TestRobot();
+
+            robot.Place(0, 0, Direction.NORTH);
+            robot.Right();
+            robot.Move();
+
+            Assert.AreEqual(0, string.Compare("1,3,NORTH", robot.Report()));
+        }
+
     }
 }

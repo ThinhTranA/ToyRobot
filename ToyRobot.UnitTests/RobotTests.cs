@@ -12,9 +12,9 @@ namespace ToyRobot.UnitTests
             //TableTop tableTop = new ToyRobot.TableTop();
             var robot = new TestRobot();
 
-            for( int i = 0; i < 5; i++)
+            for( int i = 0; i < 6; i++)
             {
-                for(int j = 0; j < 5; j++)
+                for(int j = 0; j < 6; j++)
                 {
                    Assert.AreEqual(true, robot.Place(i, j, Direction.WEST));
                 }
@@ -27,7 +27,7 @@ namespace ToyRobot.UnitTests
             var robot = new TestRobot();
             robot.Place(2, 3, Direction.WEST);
 
-            Assert.AreEqual(false, robot.Place(5, 1, Direction.NORTH));
+            Assert.AreEqual(false, robot.Place(6, 1, Direction.NORTH));
             Assert.AreEqual(0, string.Compare("2,3,WEST", robot.Report() ));
         }
 
@@ -44,20 +44,20 @@ namespace ToyRobot.UnitTests
         public void Move_InValid()
         {
             var robot = new TestRobot();
-            robot.Place(4, 4, Direction.NORTH);
+            robot.Place(5, 5, Direction.NORTH);
             robot.Move();
-            Assert.AreEqual(4, robot.Y);
-            Assert.AreEqual(0, string.Compare("4,4,NORTH", robot.Report()));
+            Assert.AreEqual(5, robot.Y);
+            Assert.AreEqual(0, string.Compare("5,5,NORTH", robot.Report()));
 
             robot.Place(0, 0, Direction.SOUTH);
             robot.Move();
             Assert.AreEqual(0, robot.Y);
             Assert.AreEqual(0, string.Compare("0,0,SOUTH", robot.Report()));
 
-            robot.Place(4, 4, Direction.EAST);
+            robot.Place(5, 5, Direction.EAST);
             robot.Move();
-            Assert.AreEqual(4, robot.X);
-            Assert.AreEqual(0, string.Compare("4,4,EAST", robot.Report()));
+            Assert.AreEqual(5, robot.X);
+            Assert.AreEqual(0, string.Compare("5,5,EAST", robot.Report()));
 
             robot.Place(0, 0, Direction.WEST);
             robot.Move();

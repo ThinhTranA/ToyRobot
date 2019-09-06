@@ -12,7 +12,7 @@ namespace RobotXamarin
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        const int numberOfTiles = 5;
+        const int numberOfTiles = 6;
         Image robotImage;
 
         Robot robot;

@@ -7,7 +7,7 @@ namespace ToyRobot
         public int Y { get; private set; }
 
         private const int minPositionValue = 0;
-        private const int maxPositionValue = 4;
+        private const int maxPositionValue = 5;
         public Direction FacingDirection { get; private set; }
 
         //Default spawn location of robot.
